@@ -1,46 +1,51 @@
-$todoautos-blue: #039be5
-$sidebar-background: #b0bec5
-$simple-result-box-border: #039be5
-$price-color: #d32f2f
-$result-hover-background: #b3e5fc
-$body-background: #e1f5fe
+@import ../../../../bower_components/materialize/sass/components/_color
+@import mixins
 
+
+$todoautos-blue: color("light-blue", "darken-1")
+$results-box-background: color("blue-grey", "lighten-3")
+$results-background: color("blue-grey", "lighten-4")
+$price-color: #d32f2f
+$result-box-background: color("grey", "lighten-5")
+$result-box-height: 150px
+$result-box-image-margin: 10px
+$result-hover-background: color("grey", "lighten-3")
+$body-background: color("grey", "lighten-4")
 
 
 body
-  background-color: $body-background 
+  background-color: $body-background
 
 .search-well
   border: 1px solid $todoautos-blue
   border-radius: 5px
   margin-top: 200px
 
+.results-box
+  background-color: $results-box-background
+  margin-top: 20px;
 
 .side-bar
-  background-color: $sidebar-background
-  height: calc(100% + 60px)
-  overflow: hidden
-  position: fixed
+  /* pending */
 
-
+  
 #results
   padding-top: 20px
   padding-left: 15px
-  
+  background-color: $results-background
   #results-list
     margin-top: 30px
     .result-box
       position: relative
-      height: 120px
-      border-right: 1px solid $simple-result-box-border
-      margin-bottom: 30px
+      height: $result-box-height
+      margin-bottom: 10px
+      background-color: $result-box-background
       &:hover
         background-color: $result-hover-background
       
       img
-        height: 100px
-        margin: 10px
-        border: $sidebar-background
+        +locate_image($result-box-height, $result-box-image-margin)
+        border: $results-box-background
       
       .result-description
         display: inline-block
