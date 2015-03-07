@@ -1,0 +1,50 @@
+.search-well {
+  border: 1px solid #039be5;
+  border-radius: 5px;
+  margin-top: 200px; }
+
+.side-bar {
+  background-color: #b0bec5;
+  height: calc(100% + 60px);
+  overflow: hidden;
+  position: fixed; }
+
+#results {
+  padding-top: 20px;
+  padding-left: 15px; }
+  #results #results-list {
+    margin-top: 30px; }
+    #results #results-list .result-box {
+      position: relative;
+      height: 120px;
+      border-right: 1px solid #039be5;
+      margin-bottom: 30px; }
+      #results #results-list .result-box:hover {
+        background-color: #e1f5fe; }
+      #results #results-list .result-box img {
+        height: 100px;
+        margin: 10px;
+        border: #b0bec5; }
+      #results #results-list .result-box .result-description {
+        display: inline-block;
+        vertical-align: top;
+        padding-left: 10px; }
+        #results #results-list .result-box .result-description .result-price {
+          display: block;
+          color: #d32f2f;
+          font-size: 24px;
+          font-weight: bold; }
+        #results #results-list .result-box .result-description .result-title {
+          display: block;
+          font-size: 18px;
+          font-weight: 600; }
+        #results #results-list .result-box .result-description .result-new {
+          display: block; }
+      #results #results-list .result-box .result-info {
+        float: right;
+        text-align: right;
+        padding-right: 10px; }
+        #results #results-list .result-box .result-info .result-region {
+          display: block; }
+        #results #results-list .result-box .result-info .result-city {
+          display: block; }

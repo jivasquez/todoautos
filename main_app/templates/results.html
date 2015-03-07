@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+
+  <div class="col s4 m2 side-bar">
+    Filtro
+  </div>
+
+  <div id="results" class="col s4 m6 offset-s4 offset-m2">
+    <h3>Resultados de la búsqueda</h3>
+    <div id="results-list">
+      <ul>
+      {% for auto in autos %}
+        <li>
+          <div class="result-box">
+            {% load staticfiles %}
+            <img src="{% static 'todoautos/images/no-image.png' %}">
+            <div class="result-description">
+              <span class="result-title">{{ auto.titulo }}</span>
+              <span class="result-price">$6.900.000</span>
+              <span class="result-new">Usado</span>
+            </div>
+            <div class="result-info">
+              <span class="result-region">R.M.</span>
+              <span class="result-city">Santiago</span>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+{% endblock %}

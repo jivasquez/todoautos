@@ -1,0 +1,72 @@
+$todoautos-blue: #039be5
+$sidebar-background: #b0bec5
+$simple-result-box-border: #039be5
+$price-color: #d32f2f
+$result-hover-background: #b3e5fc
+$body-background: #e1f5fe
+
+
+
+body
+  background-color: $body-background 
+
+.search-well
+  border: 1px solid $todoautos-blue
+  border-radius: 5px
+  margin-top: 200px
+
+
+.side-bar
+  background-color: $sidebar-background
+  height: calc(100% + 60px)
+  overflow: hidden
+  position: fixed
+
+
+#results
+  padding-top: 20px
+  padding-left: 15px
+  
+  #results-list
+    margin-top: 30px
+    .result-box
+      position: relative
+      height: 120px
+      border-right: 1px solid $simple-result-box-border
+      margin-bottom: 30px
+      &:hover
+        background-color: $result-hover-background
+      
+      img
+        height: 100px
+        margin: 10px
+        border: $sidebar-background
+      
+      .result-description
+        display: inline-block
+        vertical-align: top
+        padding-left: 10px
+        .result-price
+          display: block
+          color: $price-color
+          font-size: 24px
+          font-weight: bold
+        
+        .result-title
+          display: block
+          font-size: 18px
+          font-weight: 600 
+        
+        .result-new
+          display: block
+        
+      
+      .result-info
+        float: right
+        text-align: right
+        padding-right: 10px
+        .result-region
+          display: block
+        
+        .result-city
+          display: block
