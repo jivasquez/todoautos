@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load humanize %}
+
+<div class="container">
+  <div class="row content-box">  
+    <!-- Jssor Slider Begin -->
+    <!-- You can move inline styles to css file or css block. -->
+    <div id="slider_container" style="height: 456px;">
+      <!-- Slides Container -->
+      <div u="slides" class="slides-div">
+        <div>
+          <img u="thumb" src="http://lorempixel.com/100/100/nature/1" />
+          <img u="image" src="http://lorempixel.com/580/250/nature/1" />
+        </div>
+        <div>
+          <img u="thumb" src="http://lorempixel.com/100/100/nature/2" />
+          <img u="image" src="http://lorempixel.com/580/250/nature/2" />
+        </div>
+        <div>
+          <img u="thumb" src="http://lorempixel.com/100/100/nature/3" />
+          <img u="image" src="http://lorempixel.com/580/250/nature/3" />
+        </div>
+        <div>
+          <img u="thumb" src="http://lorempixel.com/100/100/nature/4" />
+          <img u="image" src="http://lorempixel.com/580/250/nature/4" />
+        </div>
+        <div>
+          <img u="thumb" src="http://lorempixel.com/100/100/nature/5" />
+          <img u="image" src="http://lorempixel.com/580/250/nature/5" />
+        </div>
+        <div>
+          <img u="thumb" src="http://lorempixel.com/100/100/nature/6" />
+          <img u="image" src="http://lorempixel.com/580/250/nature/6" />
+        </div>
+        <div>
+          <img u="thumb" src="http://lorempixel.com/100/100/nature/7" />
+          <img u="image" src="http://lorempixel.com/580/250/nature/7" />
+        </div>
+        <div>
+          <img u="thumb" src="http://lorempixel.com/100/100/nature/8" />
+          <img u="image" src="http://lorempixel.com/580/250/nature/8" />
+        </div>
+        <div>
+          <img u="thumb" src="http://lorempixel.com/100/100/nature/9" />
+          <img u="image" src="http://lorempixel.com/580/250/nature/9" />
+        </div>
+      </div>
+      
+      <!-- ThumbnailNavigator Skin Begin -->
+      <div u="thumbnavigator" class="jssort07" style="position: absolute; width: 400px; height: 100px; left:0px; bottom: 0px;">
+          <!-- Thumbnail Item Skin Begin -->
+          
+        <div u="slides" style="cursor: move;">
+          <div u="prototype" class="p" style="POSITION: absolute; WIDTH: 72px; HEIGHT: 72px; TOP: 0; LEFT: 0;">
+            <div u="thumbnailtemplate" class="i" style="position:absolute;"></div>
+            <div class="o"></div>
+          </div>
+        </div>
+          <!-- Thumbnail Item Skin End -->
+      </div>
+      <!-- ThumbnailNavigator Skin End -->
+      <a style="display: none" href="http://www.jssor.com">Image Slider</a>
+      <!-- Trigger -->
+      
+    </div>
+      <!-- Jssor Slider End -->
+     
+    <div class="publication-info">
+      <h1>{{publication.title}}</h1>
+      <p>{{publication.description}}</p>
+    </div>
+    
+    <div class="price-tag">
+      ${{publication.price | intcomma}}
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+<script>
+  jssor_slider1_starter = function (containerId) {
+    var options = {
+      $AutoPlay: false,                                   //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+      $SlideDuration: 500,                                //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
+
+      $ThumbnailNavigatorOptions: {                       //[Optional] Options to specify and enable thumbnail navigator or not
+        $Class: $JssorThumbnailNavigator$,              //[Required] Class to create thumbnail navigator instance
+        $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+        $AutoCenter: 3, 
+        $ActionMode: 1,                                 //[Optional] 0 None, 1 act by click, 2 act by mouse hover, 3 both, default value is 1
+        $SpacingX: 8,                                   //[Optional] Horizontal space between each thumbnail in pixel, default value is 0
+        $DisplayPieces: 5,                             //[Optional] Number of pieces to display, default value is 1
+        $ParkingPosition: 160                           //[Optional] The offset position to park thumbnail
+      }
+    };
+
+    var jssor_slider1 = new $JssorSlider$(containerId, options);
+  };
+  jssor_slider1_starter('slider_container');
+    </script>
+{% endblock %}

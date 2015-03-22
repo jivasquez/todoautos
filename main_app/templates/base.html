@@ -5,8 +5,7 @@
   {% load staticfiles %}
   <link rel="stylesheet" href="{% static 'todoautos/css/main.css' %}" />
   <link rel="stylesheet" href="{% static 'materialize/dist/css/materialize.min.css' %}" />
-  <script type="text/javascript" src="{% static 'jquery/dist/jquery.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'materialize/dist/js/materialize.min.js' %}"></script>
+  
 </head>
 <body>
 	{% include "top_bar.html" %}
@@ -15,6 +14,9 @@
     {% block content %}{% endblock %}
     
   </div>
-  
+  <script type="text/javascript" src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'materialize/dist/js/materialize.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'jssor-slider/js/jssor.slider.mini.js' %}"></script>
+  {% block script %}{% endblock %}
 </body>
 </html>

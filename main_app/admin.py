@@ -1,7 +1,8 @@
 from django.contrib import admin
-from main_app.models import Auto
+from main_app.models import Publication
 
-admin.site.register(Auto)
+admin.site.register(Publication)
+
 
 
 # Register your models here.

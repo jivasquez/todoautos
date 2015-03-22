@@ -1,0 +1,47 @@
+#results
+  padding: $results-padding
+  background-color: $results-background
+  #results-list
+    margin-top: 30px
+    .result-box
+      position: relative
+      height: $result-box-height
+      margin-bottom: 15px
+      background-color: $result-box-background
+      &:hover
+        background-color: $result-hover-background
+      
+      img
+        +locate_image($result-box-height, $result-box-image-margin)
+        border: $results-box-background
+      
+      .result-description
+        display: inline-block
+        vertical-align: top
+        padding-left: 10px
+        padding-top: 15px
+        .result-price
+          display: block
+          color: $price-color
+          font-size: 24px
+          font-weight: bold
+        
+        .result-title
+          display: block
+          font-size: 18px
+          font-weight: 600 
+        
+        .result-new
+          display: block
+        
+      
+      .result-info
+        float: right
+        text-align: right
+        padding-right: 10px
+        padding-top: 15px
+        .result-region
+          display: block
+        
+        .result-city
+          display: block

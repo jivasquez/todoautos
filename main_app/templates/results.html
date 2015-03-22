@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+{% load humanize %}
 
 <div class="container">
-  <div class="row results-box">
+  <div class="row content-box filter">
     <div class="col s4 m3 side-bar">
       Filtro
     </div>
@@ -12,14 +12,15 @@
       <h3>Resultados de la búsqueda</h3>
       <div id="results-list">
         <ul>
-        {% for auto in autos %}
+        {% for publication in publications %}
           <li>
             <div class="result-box">
               {% load staticfiles %}
               <img src="{% static 'todoautos/images/no-image.png' %}">
               <div class="result-description">
-                <span class="result-title">{{ auto.titulo }}</span>
-                <span class="result-price">$6.900.000</span>
+                <a href="/publicacion/{{publication.pk}}"><span class="result-title">{{ publication.title }}</span></a>
+
+                <span class="result-price">${{ publication.price | intcomma}}</span>
                 <span class="result-new">Usado</span>
               </div>
               <div class="result-info">

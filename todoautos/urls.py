@@ -11,6 +11,9 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^results/', views.results, name='results'),
+    url(r'^resultados/', views.results, name='results'),
+    url(r'^publicacion/(?P<publication_id>\d+)/$', views.publication, name='publication'),
     url(r'^$', views.index, name='index'),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
