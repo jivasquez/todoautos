@@ -3,14 +3,21 @@
   background-color: $results-background
   #results-list
     margin-top: 30px
+    ul
+      margin: 0px
+    li:last-of-type .result-box
+      margin-bottom: 0px
     .result-box
       position: relative
       height: $result-box-height
       margin-bottom: 15px
       background-color: $result-box-background
+
       &:hover
         background-color: $result-hover-background
-      
+        border-left: 2px solid $todoautos-blue
+        img
+          margin-left: 8px
       img
         +locate_image($result-box-height, $result-box-image-margin)
         border: $results-box-background

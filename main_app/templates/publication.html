@@ -72,6 +72,20 @@
       <p>{{publication.description}}</p>
     </div>
     
+    <div class="characteristics">
+      <h1>Características</h1>
+      <table class="hoverable">
+        {% for characteristic in characteristics %}
+        {% if characteristic.value %}
+        <tr>
+          <td>{{characteristic.label}}</td>
+          <td>{{characteristic.value}}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}  
+      </table>
+    </div>
+
     <div class="price-tag">
       ${{publication.price | intcomma}}
     </div>
