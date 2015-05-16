@@ -3,4 +3,5 @@ prepros.cfg
 db.sqlite3
 *.pyc
 .sass-cache
-settings.py
+site_settings.py
+test_settings.py

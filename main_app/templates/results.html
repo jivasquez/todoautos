@@ -6,7 +6,16 @@
 <div class="container">
   <div class="row content-box filter">
     <div class="col s4 m3 side-bar">
-      Filtro
+      <ul class="collapsible" data-collapsible="accordion">
+        <li>
+          <div class="collapsible-header">Marcas</div>
+          <div class="collapsible-body">
+            {% for tag in filters.brands.buckets %}
+            {{ tag.key }} ({{tag.doc_count}})
+            {% endfor %}
+          </div>
+        </li>
+      </ul>
     </div>
     <div id="results" class="col s8 m9">
       <h3>Resultados de la búsqueda</h3>
