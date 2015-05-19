@@ -103,19 +103,21 @@ class Publication(models.Model):
         # # Get brand from db or save new brand
         if 'brand' in publication_json.keys():
             brand, created = Brand.objects.get_or_create(name=publication_json.get('brand'))
+            brand.save()
             publication.brand = brand
+
 
         if 'city' in publication_json.keys():
             city, created = City.objects.get_or_create(name=publication_json.get('city'))
+            city.save()
             publication.city = city
 
 
         publication.save()
         if 'contact_numbers' in publication_json.keys():
             for contact_number in publication_json.get('contact_numbers'):
-                phone = PhoneNumber(publication=publication, number=str(contact_number.get('number')), phone_type=str(contact_number.get('phone_type')))
+                phone = PhoneNumber(publication=publication, number=contact_number.get('number'), phone_type=contact_number.get('phone_type'))
                 phone.save()
-            import ipdb; ipdb.set_trace()
         publication.save()
 
         return publication
@@ -195,6 +197,6 @@ class Publication(models.Model):
 
 
 class PhoneNumber(models.Model):
-    publication = models.ForeignKey(Publication, on_delete=models.CASCADE, null=True)    
+    publication = models.ForeignKey(Publication, on_delete=models.CASCADE, null=True, related_name='contact_numbers')    
     number = models.CharField(max_length=30)
     phone_type = models.CharField(max_length=30)
