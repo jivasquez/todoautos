@@ -20,7 +20,6 @@ class City(models.Model):
 class Brand(models.Model):
     name = models.CharField(max_length=200)
 
-    
 class Publication_index(DocType):
     title = String(analyzer='snowball')
     description = String(analyzer='snowball')
@@ -34,7 +33,7 @@ class Publication_index(DocType):
     city = String(analyzer='snowball')
     region = String(analyzer='snowball')
     year = Integer()
-    publication_date = Date()
+    # publication_date = Date()
     type_of_vehicle = String(analyzer='snowball')
     vehicle_body = String(analyzer='snowball')
     color = String(analyzer='snowball')
@@ -95,7 +94,6 @@ class Publication(models.Model):
 
     @staticmethod
     def retrieve_from_chileautos(publication_id):
-        import ipdb; ipdb.set_trace()
         publication_json = ChileautosScrapper.retrieve_publication(publication_id)
         publication = Publication()
         for key, value in publication_json.iteritems():
@@ -111,8 +109,14 @@ class Publication(models.Model):
             city, created = City.objects.get_or_create(name=publication_json.get('city'))
             publication.city = city
 
+
+        publication.save()
         if 'contact_numbers' in publication_json.keys():
+            for contact_number in publication_json.get('contact_numbers'):
+                phone = PhoneNumber(publication=publication, number=str(contact_number.get('number')), phone_type=str(contact_number.get('phone_type')))
+                phone.save()
             import ipdb; ipdb.set_trace()
+        publication.save()
 
         return publication
 
@@ -125,14 +129,17 @@ class Publication(models.Model):
         publication_index.price = self.price
         publication_index.source = self.source
         publication_index.chileautos_id = self.chileautos_id
-        publication_index.brand = self.brand.name
+        if self.brand:
+            publication_index.brand = self.brand.name
         publication_index.model = self.model
         publication_index.model_version = self.model_version
         publication_index.plate_number = self.plate_number
-        publication_index.city = self.city.name
-        publication_index.region = self.region.name
+        if self.city:
+            publication_index.city = self.city.name
+        if self.region:
+            publication_index.region = self.region.name
         publication_index.year = self.year
-        publication_index.publication_date = self.publication_date
+        # publication_index.publication_date = self.publication_date
         publication_index.type_of_vehicle = self.type_of_vehicle
         publication_index.vehicle_body = self.vehicle_body
         publication_index.color = self.color
@@ -188,6 +195,6 @@ class Publication(models.Model):
 
 
 class PhoneNumber(models.Model):
-    publication = models.ForeignKey(Publication, related_name='contact_numbers')    
+    publication = models.ForeignKey(Publication, on_delete=models.CASCADE, null=True)    
     number = models.CharField(max_length=30)
     phone_type = models.CharField(max_length=30)
