@@ -41,14 +41,15 @@ class TestPublicationRetrieval(TestCase):
         #   }
 
 
-        # publication = Publication.retrieve_from_chileautos(4522651)
-        # self.assertEquals(publication.brand.name, 'Audi')
-        # self.assertEquals(publication.chileautos_id, 4522651)
-        # self.assertEquals(publication.city.name, "Santiago")
-        # self.assertEquals(publication.plate_number, "WV2488")
-        # self.assertEquals(publication.contact_numbers.all()[0].number, "99054960")
-        # self.assertEquals(publication.contact_numbers.all()[0].phone_type, "mobile")
+        publication = Publication.retrieve_from_chileautos(4522651)
+        self.assertEquals(publication.brand.name, 'Audi')
+        self.assertEquals(publication.chileautos_id, 4522651)
+        self.assertEquals(publication.city.name, "Santiago")
+        self.assertEquals(publication.plate_number, "WV2488")
+        self.assertEquals(publication.contact_numbers.all()[0].number, "99054960")
+        self.assertEquals(publication.contact_numbers.all()[0].phone_type, "mobile")
 
         publication2 = Publication.retrieve_from_chileautos(4552794)
         self.assertEquals(publication2.contact_numbers.all()[0].number, "42697585")
         self.assertEquals(publication2.contact_numbers.all()[1].number, "225261936")
+        self.assertEquals(publication2.contact_numbers.all()[1].phone_type, "landline")

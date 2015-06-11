@@ -62,7 +62,7 @@ class Publication(models.Model):
     description = models.TextField(blank=True)
     price = models.IntegerField(default=0)
     source = models.CharField(max_length=200)
-    chileautos_id = models.IntegerField(null=True)
+    chileautos_id = models.IntegerField(null=True, unique=True)
     brand = models.ForeignKey(Brand)
     model = models.TextField(blank=True)
     model_version = models.TextField(blank=True)
@@ -94,8 +94,13 @@ class Publication(models.Model):
 
     @staticmethod
     def retrieve_from_chileautos(publication_id):
+        existent = Publication.objects.filter(chileautos_id=publication_id).exists()
+        if existent:
+            # If already exists it may have changed so I retrieve it anyway
+            publication = Publication.objects.get(chileautos_id=publication_id)
+        else:
+            publication = Publication()
         publication_json = ChileautosScrapper.retrieve_publication(publication_id)
-        publication = Publication()
         for key, value in publication_json.iteritems():
             if key not in ['brand', 'city', 'region', 'contact_numbers']:
                 publication.__setattr__(key, value)
@@ -167,6 +172,8 @@ class Publication(models.Model):
 
     CHARACTERISTICS = [
       { 'key': 'brand', 'label': 'Marca', 'type': 'brand'},
+      { 'key': 'model', 'label': 'Modelo', 'type': 'string'},
+      { 'key': 'model_version', 'label': 'Versión', 'type': 'string'},
       { 'key': 'type_of_vehicle', 'label': 'Tipo de vehículo', 'type': 'string'},
       { 'key': 'vehicle_body', 'label': 'Chasis', 'type': 'string'},
       { 'key': 'fuel', 'label': 'Tipo de combustible', 'type': 'string'},
@@ -176,25 +183,48 @@ class Publication(models.Model):
       { 'key': 'centralized_locking', 'label': 'Cierre centralizado', 'type': 'boolean'},
       { 'key': 'airbag', 'label': 'Airbag', 'type': 'boolean'},
       { 'key': 'abs_break', 'label': 'Frenos ABS', 'type': 'boolean'},
-      { 'key': 'kilometers', 'label': 'Kilómetros', 'type': 'integer'}
+      { 'key': 'catalitic', 'label': 'Catalítico', 'type': 'boolean'},
+      { 'key': 'alarm', 'label': 'Alarma', 'type': 'boolean'},
+      { 'key': 'assisted_steering', 'label': 'Dirección asistida', 'type': 'boolean'},
     ]
 
-    
+    def usage(self):
+        if self.is_new:
+          return "Nuevo"
+        if self.is_new == False:
+          return "Usado"
+        return ""
+
     def get_characteristics(self):
 
-      for characteristic in self.CHARACTERISTICS:
-        if characteristic.get('type') == 'boolean':
-          characteristic['value'] = "Si" if self.__dict__[characteristic.get('key')] else "No"
-        if characteristic.get('type') == 'string':
-          characteristic['value'] = self.__dict__[characteristic.get('key')]
-        if characteristic.get('type') == 'custom_boolean':
-          characteristic['value'] = characteristic.get('alternatives').get('True') if self.__dict__[characteristic.get('key')] else characteristic.get('alternatives').get('False')
-        if characteristic.get('type') == 'integer':
-          characteristic['value'] = self.__dict__[characteristic.get('key')]
-        if characteristic.get('type') == 'brand':
-          characteristic['value'] = self.brand.name
-      return self.CHARACTERISTICS
+        for characteristic in self.CHARACTERISTICS:
+            if characteristic.get('type') == 'boolean':
+                if self.__dict__.get(characteristic.get('key')):
+                    characteristic['value'] = "Si"
+                elif self.__dict__.get(characteristic.get('key')) == False:
+                    characteristic['value'] = "No"
+                else:
+                    characteristic['value'] = None
+            if characteristic.get('type') == 'string':
+                characteristic['value'] = self.__dict__[characteristic.get('key')]
+            if characteristic.get('type') == 'custom_boolean':
+                characteristic['value'] = characteristic.get('alternatives').get('True') if self.__dict__[characteristic.get('key')] else characteristic.get('alternatives').get('False')
+            if characteristic.get('type') == 'integer':
+                characteristic['value'] = self.__dict__[characteristic.get('key')]
+            if characteristic.get('type') == 'brand':
+                characteristic['value'] = self.brand.name
+        return self.CHARACTERISTICS
 
+
+    def source_url(self):
+        if self.chileautos_id:
+            return "http://www.chileautos.cl/auto.asp?codauto=%s" % self.chileautos_id
+        return "#"
+
+    def source_name(self):
+        if self.chileautos_id:
+            return "Chileautos"
+        return "TodoAutos"
 
 class PhoneNumber(models.Model):
     publication = models.ForeignKey(Publication, on_delete=models.CASCADE, null=True, related_name='contact_numbers')    

@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="{% static 'materialize/dist/css/materialize.min.css' %}" />
   
 </head>
-<body>
+<body ng-app="todoautos">
 	{% include "top_bar.html" %}
   <div id="main">
     
@@ -15,8 +15,10 @@
     
   </div>
   <script type="text/javascript" src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'angularjs/angular.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'materialize/dist/js/materialize.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'jssor-slider/js/jssor.slider.mini.js' %}"></script>
+  <script type="text/javascript"> var app = angular.module('todoautos', []);</script>
   {% block script %}{% endblock %}
 </body>
 </html>

@@ -1,0 +1,21 @@
+{
+  "name": "todoautos",
+  "version": "0.0.0",
+  "homepage": "https://github.com/jivasquez/todoautos",
+  "authors": [
+    "Juan Ignacio Vásquez <ji.vasquez0@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angularjs": "~1.4.0",
+    "jssor-slider": "*",
+    "materialize": "~0.95.2"
+  }
+}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container" ng-controller="scrapperAdmin">
+<form>
+  <div class="row">
+    <div class="input-field col s12">
+      <input type="text" id="importar_chileautos" ng-model="chileautos_id">
+      <label for="importar_chileautos">Importar desde Chileautos:</label>
+      <button class="waves-effect waves-light btn " ng-click="import_from_chileautos()">Submit</button>
+    </div>
+  </div>
+
+</form>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+  app.controller('scrapperAdmin', function($scope, $http) {
+    $scope.import_from_chileautos = function(){
+      $http.get('/add_publication/chileautos/' + $scope.chileautos_id).success(function(data){
+        console.log(data);
+      });
+    }
+  });
+</script>
+{% endblock %}

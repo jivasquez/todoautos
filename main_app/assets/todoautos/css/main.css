@@ -2242,13 +2242,28 @@ body {
   display: inline-block;
   vertical-align: top;
   padding-left: 10px;
-  padding-right: 10px; }
-  /* line 6, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
+  padding-right: 10px;
+  width: calc(100% - 410px); }
+  /* line 7, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
   .publication-info h1 {
     font-size: 36px;
-    font-weight: bold; }
+    font-weight: bold;
+    margin-bottom: 10px;
+    line-height: 40px; }
+  /* line 12, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
+  .publication-info h4 {
+    font-size: 28px;
+    line-height: 28px;
+    margin-top: 0px;
+    margin-bottom: 30px; }
+    /* line 17, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
+    .publication-info h4.source-info {
+      font-size: 18px;
+      line-height: 18px;
+      margin-top: 0px;
+      margin-bottom: 10px; }
 
-/* line 10, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
+/* line 24, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
 .price-tag {
   position: absolute;
   top: 0px;
@@ -2264,13 +2279,13 @@ body {
   font-size: 28px;
   font-weight: bold; }
 
-/* line 25, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
+/* line 39, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
 .characteristics {
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 20px; }
 
-/* line 31, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
+/* line 45, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
 #slider_container {
   position: relative;
   display: inline-block;
@@ -2280,7 +2295,7 @@ body {
   height: 456px;
   background: #24262e;
   overflow: hidden; }
-  /* line 40, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
+  /* line 54, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
   #slider_container .slides-div {
     cursor: move;
     position: absolute;
@@ -2290,7 +2305,7 @@ body {
     height: 356px;
     overflow: hidden; }
 
-/* line 49, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
+/* line 63, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
 .jssort07 .i {
   position: absolute;
   top: 0px;
@@ -2300,12 +2315,12 @@ body {
   filter: alpha(opacity=80);
   opacity: 0.8; }
 
-/* line 58, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
+/* line 72, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
 .jssort07 .p:hover .i, .jssort07 .pav .i {
   filter: alpha(opacity=100);
   opacity: 1; }
 
-/* line 62, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
+/* line 76, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
 .jssort07 .o {
   position: absolute;
   top: 0px;
@@ -2319,21 +2334,21 @@ body {
   -webkit-transition: border-color 0.6s;
   -o-transition: border-color 0.6s; }
 
-/* line 76, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
+/* line 90, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
 * html .jssort07 .o {
   /* ie quirks mode adjust */
   width: 72px;
   height: 72px; }
 
-/* line 81, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
+/* line 95, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
 .jssort07 .pav .o, .jssort07 .p:hover .o {
   border-color: #fff; }
 
-/* line 84, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
+/* line 98, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
 .jssort07 .pav:hover .o {
   border-color: #0099FF; }
 
-/* line 87, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
+/* line 101, C:/Users/Juan Ignacio/Documents/Ubuntu_compartida/Proyectos/todoautos/main_app/assets/todoautos/sass/publication */
 .jssort07 .p:hover .o {
   transition: none;
   -moz-transition: none;
