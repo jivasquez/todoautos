@@ -1,12 +1,19 @@
 # -*- encoding: utf-8 -*-
+import re
 
+import requests
 from django.db import models
 from django.conf import settings
 from elasticsearch_dsl import DocType, String, Integer, Float, Date, Boolean
 from elasticsearch_dsl.connections import connections
+from sorl.thumbnail import ImageField, get_thumbnail
+from django.core.files import File
+from django.core.files.temp import NamedTemporaryFile
+from celery import Celery
 
 from todoautosscraper.chileautos_scraper import ChileautosScrapper
 
+app = Celery('models', backend='rpc://', broker='amqp://guest@localhost//')
 connections.create_connection(hosts=['localhost'])
 
 # Create your models here.
@@ -93,6 +100,13 @@ class Publication(models.Model):
     contact_name = models.CharField(max_length=200, blank=True)
 
     @staticmethod
+    @app.task
+    def retrieve_from_chileautos_and_save(publication_id):
+        publication = Publication.retrieve_from_chileautos(publication_id)
+        publication.save()
+        return publication
+
+    @staticmethod
     def retrieve_from_chileautos(publication_id):
         existent = Publication.objects.filter(chileautos_id=publication_id).exists()
         if existent:
@@ -117,8 +131,27 @@ class Publication(models.Model):
             city.save()
             publication.city = city
 
-
         publication.save()
+
+        if 'images' in publication_json.keys():
+            for image_url in publication_json.get('images'):
+                response = requests.get(image_url)
+                temp_image = NamedTemporaryFile(delete=True)
+                temp_image.write(response.content)
+                temp_image.flush()
+                publication_image, created = PublicationImage.objects.get_or_create(source_url=image_url)
+                if created:
+                    filename_regex = re.compile('g_([\w.]+)')
+                    file_name = filename_regex.search(image_url).group()
+                    publication_image.image.save(file_name, File(temp_image), save=True)
+                    get_thumbnail(publication_image.image, '72x72', crop='center')
+                    publication_image.source_url = image_url
+                    publication_image.publication = publication
+                    publication_image.save()
+            get_thumbnail(publication.publication_images.first().image, '130x130', crop='center')
+            
+
+
         if 'contact_numbers' in publication_json.keys():
             for contact_number in publication_json.get('contact_numbers'):
                 phone = PhoneNumber(publication=publication, number=contact_number.get('number'), phone_type=contact_number.get('phone_type'))
@@ -230,3 +263,8 @@ class PhoneNumber(models.Model):
     publication = models.ForeignKey(Publication, on_delete=models.CASCADE, null=True, related_name='contact_numbers')    
     number = models.CharField(max_length=30)
     phone_type = models.CharField(max_length=30)
+
+class PublicationImage(models.Model):
+    source_url = models.CharField(max_length=300, null=True)
+    publication = models.ForeignKey(Publication, on_delete=models.CASCADE, null=True, related_name='publication_images')
+    image =  ImageField(upload_to='publications')

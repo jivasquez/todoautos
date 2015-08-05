@@ -14,7 +14,7 @@ def index(request):
 
 def search(request):
     client = Elasticsearch()
-    query = Q("multi_match", query=request.GET.get('q'), fields=['title', 'description', 'brand', 'type_of_vehicle', 'vehicle_body'])
+    query = Q("simple_query_string", query=request.GET.get('q'), fields=['title', 'description', 'brand', 'type_of_vehicle', 'vehicle_body', 'model', 'model_version', 'city'])
     s = Search(using=client, index=settings.ELASTICSEARCH_PUBLICATIONS_INDEX).query(query)
 
     s.aggs.bucket('brands', 'terms', field='brand')
@@ -38,8 +38,7 @@ def scraper_admin(request):
     return render(request, "scraper_admin.html")
 
 def add_publication_from_chileautos(request, chileautos_id):
-    publication = Publication.retrieve_from_chileautos(chileautos_id)
-    publication.save()
+    publication = Publication.retrieve_from_chileautos_and_save.delay(chileautos_id)
     print publication.id
 
     return HttpResponse(json.dumps({"status": "OK", "chileautos_id": publication.id}), content_type='application/json')

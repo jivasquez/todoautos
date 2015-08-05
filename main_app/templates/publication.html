@@ -10,42 +10,15 @@
     <div id="slider_container" style="height: 456px;">
       <!-- Slides Container -->
       <div u="slides" class="slides-div">
+      {% load thumbnail %}
+        {% for item in publication.publication_images.all %}
         <div>
-          <img u="thumb" src="http://lorempixel.com/100/100/nature/1" />
-          <img u="image" src="http://lorempixel.com/580/250/nature/1" />
+          {% thumbnail item.image "72x72" crop="center" as im %}
+            <img  u="thumb" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+          {% endthumbnail %}
+          <img u="image" src="{{ item.image.url }}" />
         </div>
-        <div>
-          <img u="thumb" src="http://lorempixel.com/100/100/nature/2" />
-          <img u="image" src="http://lorempixel.com/580/250/nature/2" />
-        </div>
-        <div>
-          <img u="thumb" src="http://lorempixel.com/100/100/nature/3" />
-          <img u="image" src="http://lorempixel.com/580/250/nature/3" />
-        </div>
-        <div>
-          <img u="thumb" src="http://lorempixel.com/100/100/nature/4" />
-          <img u="image" src="http://lorempixel.com/580/250/nature/4" />
-        </div>
-        <div>
-          <img u="thumb" src="http://lorempixel.com/100/100/nature/5" />
-          <img u="image" src="http://lorempixel.com/580/250/nature/5" />
-        </div>
-        <div>
-          <img u="thumb" src="http://lorempixel.com/100/100/nature/6" />
-          <img u="image" src="http://lorempixel.com/580/250/nature/6" />
-        </div>
-        <div>
-          <img u="thumb" src="http://lorempixel.com/100/100/nature/7" />
-          <img u="image" src="http://lorempixel.com/580/250/nature/7" />
-        </div>
-        <div>
-          <img u="thumb" src="http://lorempixel.com/100/100/nature/8" />
-          <img u="image" src="http://lorempixel.com/580/250/nature/8" />
-        </div>
-        <div>
-          <img u="thumb" src="http://lorempixel.com/100/100/nature/9" />
-          <img u="image" src="http://lorempixel.com/580/250/nature/9" />
-        </div>
+        {% endfor %}
       </div>
       
       <!-- ThumbnailNavigator Skin Begin -->
@@ -103,7 +76,7 @@
     var options = {
       $AutoPlay: false,                                   //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
       $SlideDuration: 500,                                //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
-
+      $FillMode: 1,
       $ThumbnailNavigatorOptions: {                       //[Optional] Options to specify and enable thumbnail navigator or not
         $Class: $JssorThumbnailNavigator$,              //[Required] Class to create thumbnail navigator instance
         $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
@@ -111,11 +84,12 @@
         $ActionMode: 1,                                 //[Optional] 0 None, 1 act by click, 2 act by mouse hover, 3 both, default value is 1
         $SpacingX: 8,                                   //[Optional] Horizontal space between each thumbnail in pixel, default value is 0
         $DisplayPieces: 5,                             //[Optional] Number of pieces to display, default value is 1
-        $ParkingPosition: 160                           //[Optional] The offset position to park thumbnail
+        $ParkingPosition: 160,                           //[Optional] The offset position to park thumbnail
+        
       }
     };
-
     var jssor_slider1 = new $JssorSlider$(containerId, options);
+    /*jssor_slider1.$ScaleWidth(400); */
   };
   jssor_slider1_starter('slider_container');
     </script>

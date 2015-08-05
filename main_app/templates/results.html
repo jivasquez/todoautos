@@ -25,7 +25,14 @@
           <li>
             <div class="result-box">
               {% load staticfiles %}
+              {% if publication.publication_images.first %}
+              {% load thumbnail %}
+              {% thumbnail publication.publication_images.first.image "130x130" crop="center" as im %}
+                <img  u="thumb" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+              {% endthumbnail %}
+              {% else %}
               <img src="{% static 'todoautos/images/no-image.png' %}">
+              {% endif %}
               <div class="result-description">
                 <a href="/publicacion/{{publication.pk}}" class="overlay-link"></a>
                 <span class="result-title">{{ publication.title }}</span>
